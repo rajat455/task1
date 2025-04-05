@@ -16,8 +16,8 @@
 - npm install
 
 ## Setup (create env file with below variables)
-JWT_KEY="somthing_secret"
-MONGODB_URL="mongodb://127.0.0.1:27017/task1"
+JWT_SECRET="somthing_secret"
+MONGO_URI="mongodb://host.docker.internal:27017/task1"
 APP_URL="http://127.0.0.1:5000"
 
 ## Running Tests

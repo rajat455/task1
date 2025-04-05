@@ -32,7 +32,7 @@ class AuthController {
         const { firstName, lastName, phone, password } = req.body
         const result: any = await AuthModel.create({ firstName, phone, lastName, password: bcrypt.hashSync(password, 8) })
         if (!result) return HttpError(500, "Somthing went wrong!")
-        const token = jwt.sign({ ...result }, process.env?.JWT_KEY || "somthing_secret", { expiresIn: "2d" })
+        const token = jwt.sign({ ...result }, process.env?.JWT_SECRET || "somthing_secret", { expiresIn: "2d" })
         delete result.password
         if (!token) return HttpError(500, "Somthing went wrong!")
         return res.status(200).send({ message: "Success", token })
@@ -48,7 +48,7 @@ class AuthController {
             return HttpError(400, "Password and phone are't matched!")
         }
         delete result.password
-        const token = jwt.sign({ ...result }, process.env?.JWT_KEY || "somthing_secret", { expiresIn: "2d" })
+        const token = jwt.sign({ ...result }, process.env?.JWT_SECRET || "somthing_secret", { expiresIn: "2d" })
         if (!token) return HttpError(500, "Somthing went wrong!")
         return res.status(200).send({ message: "Success", token })
     }
